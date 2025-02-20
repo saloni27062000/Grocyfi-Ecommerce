@@ -1,5 +1,6 @@
 <?php 
 include("./connect.php");
+include("./Functions/common_functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,28 +22,22 @@ include("./connect.php");
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item ">
-          <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+          <a class="nav-link active text-light" aria-current="page" href="#">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Link</a>
+          <a class="nav-link text-light" href="#">MyBasket</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+        
        
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
+
+    <!-- <div class="container">
+      <img class="img-fluid" src="./images/login.png" style>
+    </div> -->
     </div>
   </div>
 </nav>
@@ -58,32 +53,7 @@ include("./connect.php");
             <div class="row ">
             <!-- fetching products  -->
             <?php
-            $select_query = "select * from `products` order by rand()";
-            $result_query = mysqli_query($conn, $select_query);
-            while ($row = mysqli_fetch_assoc($result_query)) {
-
-              $product_id = $row["product_id"];
-              $product_title = $row["product_title"];
-              $product_description = $row["product_description"];
-              $product_image1 = $row["product_image1"];
-              $product_price = $row["product_price"];
-              $category_id = $row["category_id"];
-              $brand_id = $row["brand_id"];
-              echo "
-              <div class='col-md-4 d-flex justify-content-center p-2'>
-                <div class='card' style='width: 18rem;'>
-                 <img src='.../admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                       <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'>$product_description</p>
-                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='' class='btn btn-outline-success'>View More</a></span>
-                         
-                     </div>
-                    </div>
-                </div>
-              ";
-
-            }
+           getproducts()
 
             ?>
                 
