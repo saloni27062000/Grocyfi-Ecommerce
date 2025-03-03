@@ -21,6 +21,9 @@ include("./Functions/common_functions.php");
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item ">
+          <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
+        </li>
         <li class="nav-item ">
           <a class="nav-link active text-light" aria-current="page" href="#">Categories</a>
         </li>
@@ -51,10 +54,16 @@ include("./Functions/common_functions.php");
         <div class="col-md-10 ">
           <!-- products -->
             <div class="row ">
-            <!-- fetching products  -->
+            <!-- fetching products on home page -->
             <?php
-           getproducts()
+           getproducts();
+           
 
+            ?>
+
+            <?php
+            get_unique_categories();
+            get_unique_brands()
             ?>
                 
                 </div>
@@ -64,30 +73,14 @@ include("./Functions/common_functions.php");
         <ul class="list-group">
           <li class="list-group-item active bg-success" aria-current="true">Delivary Brands</li>
           <?php 
-          $select_brands="select * from `brands`";
-          $result_brands=mysqli_query($conn, $select_brands);
-          while($row_data=mysqli_fetch_assoc($result_brands)) {
-
-            $brand_title=$row_data['brand_title'];
-            $brand_id=$row_data['brand_id'];
-            echo "<li class='list-group-item nav-item'><a href='index.php?brand=$brand_id' class ='nav-link text-success'>$brand_title</a></li>";
-
-          }
+          getbrands();
           ?>
     
         </ul>
         <ul class="list-group">
           <li class="list-group-item active bg-success" aria-current="true">Categories</li>
           <?php 
-          $select_category="select * from `categories`";
-          $result_category=mysqli_query($conn, $select_category);
-          while($row_data=mysqli_fetch_assoc($result_category)) {
-
-            $category_title=$row_data['category_title'];
-            $category_id=$row_data['category_id'];
-            echo "<li class='list-group-item nav-item'><a href='index.php?category=$category_id' class ='nav-link text-success'>$category_title</a></li>";
-
-          }
+         getcategories();
           ?>
         </ul>
         </div>
@@ -96,8 +89,7 @@ include("./Functions/common_functions.php");
 
 <footer>
   <div class="conatiner-fluid bg-success mt-5 p-4 text-center text-light">
-    All rights reserved by 
-  </div>
+  © Copyright Grocyfi All Rights Reserved Designed by Saloni Sonawane  </div>
   </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

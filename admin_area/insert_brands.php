@@ -2,7 +2,8 @@
 include("../connect.php");
 
 
-if(isset($_POST["insert_brand"])){  //if the condition is set if submit button is click ie insert_cat perform this query
+
+if(isset($_POST["insert_brand"])){  //if the condition is set if submit button is click ie insert_brand perform this query
 
     $brand_title = $_POST["brand_title"];
 
