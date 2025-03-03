@@ -1,5 +1,5 @@
 <?php
-include("../connect.php");
+include("../includes/connect.php");
 
 
 if(isset($_POST["insert_cat"])){  //if the condition is set if submit button is click ie insert_cat perform this query

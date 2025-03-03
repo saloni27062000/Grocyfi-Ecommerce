@@ -1,6 +1,6 @@
 <?php
 
-include(__DIR__ . "/../connect.php"); 
+include(__DIR__ . '/../includes/connect.php');
 
 
 function getproducts(){
@@ -9,17 +9,20 @@ function getproducts(){
             if(!isset($_GET['category'])){
               if(!isset($_GET['brand'])){
 
-            $select_query = "select * from `products` order by rand()";
+            $select_query = "select * from `products` order by rand() LIMIT 0,9";
             $result_query = mysqli_query($conn, $select_query);
             while ($row = mysqli_fetch_assoc($result_query)) {
 
               $product_id = $row["product_id"];
               $product_title = $row["product_title"];
               $product_description = $row["product_description"];
+              $product_image1 = $row["product_image1"];
               $product_image2 = $row["product_image2"];
+              $product_image3 = $row["product_image3"];
               $product_price = $row["product_price"];
               $category_id = $row["category_id"];
               $brand_id = $row["brand_id"];
+           
               echo "
               <div class='col-md-4 d-flex justify-content-center p-2'>
                 <div class='card' style='width:18rem;'>
@@ -35,9 +38,78 @@ function getproducts(){
                 </div>
               ";
 
+              echo "
+              <div class='col-md-4 d-flex justify-content-center p-2'>
+                <div class='card' style='width:18rem;'>
+                 <img src='./admin_area/product_images/$product_image3' class='card-img-top' alt='$product_title' style='width:auto; height:250px;'>
+                    <div class='card-body'>
+                       <h5 class='card-title'>$product_title</h5>
+                        <p class='card-text'>$product_description</p>
+                        <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
+                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='' class='btn btn-outline-success'>View More</a></span>
+                         
+                     </div>
+                    </div>
+                </div>
+              ";
+
+              echo "
+              <div class='col-md-4 d-flex justify-content-center p-2'>
+                <div class='card' style='width:18rem;'>
+                 <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title' style='width:auto; height:250px;'>
+                    <div class='card-body'>
+                       <h5 class='card-title'>$product_title</h5>
+                        <p class='card-text'>$product_description</p>
+                        <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
+                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='' class='btn btn-outline-success'>View More</a></span>
+                         
+                     </div>
+                    </div>
+                </div>
+              ";
+
             }
         }
       }
+    }
+
+
+    //getting all products
+
+    function get_all_products(){
+      global $conn;
+      if(!isset($_GET['category'])){
+        if(!isset($_GET['brand'])){
+
+      $select_query = "select * from `products` order by rand()";
+      $result_query = mysqli_query($conn, $select_query);
+      while ($row = mysqli_fetch_assoc($result_query)) {
+
+        $product_id = $row["product_id"];
+        $product_title = $row["product_title"];
+        $product_description = $row["product_description"];
+        $product_image2 = $row["product_image2"];
+        $product_price = $row["product_price"];
+        $category_id = $row["category_id"];
+        $brand_id = $row["brand_id"];
+        echo "
+        <div class='col-md-4 d-flex justify-content-center p-2'>
+          <div class='card' style='width:18rem;'>
+           <img src='./admin_area/product_images/$product_image2' class='card-img-top' alt='$product_title' style='width:auto; height:250px;'>
+              <div class='card-body'>
+                 <h5 class='card-title'>$product_title</h5>
+                  <p class='card-text'>$product_description</p>
+                  <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
+                   <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='' class='btn btn-outline-success'>View More</a></span>
+                   
+               </div>
+              </div>
+          </div>
+        ";
+
+      }
+  }
+}
     }
 
 
@@ -159,4 +231,43 @@ function getcategories()
       echo "<li class='list-group-item nav-item'><a href='index.php?category=$category_id' class ='nav-link text-success'>$category_title</a></li>";
 
     }
-}?>
+}
+
+//searching product search button
+
+function search_product(){
+  global $conn;
+
+  if(isset($_GET['search_data_product'])){
+
+  $search_data_value = $_GET['search_data'];
+  $search_query = "select * from `products` where product_keywords like '%$search_data_value%'"; //  % is for searching the data which is at any position in the database 
+  $result_query = mysqli_query($conn, $search_query);
+  while ($row = mysqli_fetch_assoc($result_query)) {
+
+    $product_id = $row["product_id"];
+    $product_title = $row["product_title"];
+    $product_description = $row["product_description"];
+    $product_image2 = $row["product_image2"];
+    $product_price = $row["product_price"];
+    $category_id = $row["category_id"];
+    $brand_id = $row["brand_id"];
+    echo "
+    <div class='col-md-4 d-flex justify-content-center p-2'>
+      <div class='card' style='width:18rem;'>
+       <img src='./admin_area/product_images/$product_image2' class='card-img-top' alt='$product_title' style='width:auto; height:250px;'>
+          <div class='card-body'>
+             <h5 class='card-title'>$product_title</h5>
+              <p class='card-text'>$product_description</p>
+              <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
+               <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='' class='btn btn-outline-success'>View More</a></span>
+               
+           </div>
+          </div>
+      </div>
+    ";
+
+}
+}
+}
+?>

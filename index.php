@@ -1,5 +1,5 @@
 <?php 
-include("./connect.php");
+include("./includes/connect.php");
 include("./Functions/common_functions.php");
 ?>
 
@@ -25,7 +25,10 @@ include("./Functions/common_functions.php");
           <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link active text-light" aria-current="page" href="#">Categories</a>
+          <a class="nav-link  text-light" aria-current="page" href="display_allproducts.php">Products</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link  text-light" aria-current="page" href="#">Categories</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-light" href="#">MyBasket</a>
@@ -33,9 +36,9 @@ include("./Functions/common_functions.php");
         
        
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+      <form class="d-flex" action="search_product.php" method="get">
+        <input class="form-control me-2" name="search_data" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" name="search_data_product" type="submit" value="search">Search</button>
       </form>
 
     <!-- <div class="container">
@@ -46,8 +49,49 @@ include("./Functions/common_functions.php");
 </nav>
 
 
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="./images/grocerybanner3.jpg" class="d-block w-100 " alt="..." height="auto">
+      <!-- <div class="carousel-caption d-none d-md-block d-flex justify-content-center">
+        <h1 class="d-flex justify-content-center text-success">First slide label</h1>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div> -->
+    </div>
+    <div class="carousel-item">
+      <img src="./images/grocerybanner5.jpg" class="d-block w-100" alt="...">
+      <!-- <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div> -->
+    </div>
+    <div class="carousel-item">
+      <img src="./images/grocerybanner4.jpg" class="d-block w-100" alt="...">
+      <!-- <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div> -->
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
 <div class="container-fluid">
-    <h2 class="text-success text-center mt-5">Choose Fresh Groceries for a Healthier, Happier Life.</h2>
+
+    <h1 class="text-success text-center mt-5">Grocyfi – Where Quality Meets Convenience.</h1>
 
     <div class="row mt-5">
 
@@ -87,10 +131,11 @@ include("./Functions/common_functions.php");
     </div>
 </div>
 
-<footer>
-  <div class="conatiner-fluid bg-success mt-5 p-4 text-center text-light">
-  © Copyright Grocyfi All Rights Reserved Designed by Saloni Sonawane  </div>
-  </footer>
+<!-- include footer  -->
+<?php
+include("./includes/footer.php");
+?>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
