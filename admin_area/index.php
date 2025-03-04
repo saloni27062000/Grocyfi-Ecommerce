@@ -6,14 +6,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Admin Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+    <link rel="icon" type="image/x-icon" href="../images/logo1.png">
 
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-success">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1 text-light fw-bolder">GROCYFI - Admin Dashboard</span>
+    <span class="navbar-brand mb-0 h1">  <img class="img-fluid" src="../images/logo1.png" width="80px" height="50px">
+    <a href="../index.php" class="text-light fw-bolder" style="text-decoration:none">GROCYFI - Admin Dashboard</span>
   </div>
 </nav>
 <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">

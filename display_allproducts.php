@@ -10,11 +10,12 @@ include("./Functions/common_functions.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Grocyfi - Products</title>
-    <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+    <link rel="icon" type="image/x-icon" href="images/logo1.png">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-success ">
   <div class="container-fluid">
+  <img class="img-fluid" src="./images/logo1.png" width="80px" height="80px">
     <a class="navbar-brand text-light fw-bolder" href="#">GROCYFI</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -68,18 +69,18 @@ include("./Functions/common_functions.php");
                 </div>
                 </div>
                 
-        <div class="col-lg-2  p-0 rounded-3">
+        <div class="col-lg-2  p-0 rounded-3 ">
         <ul class="list-group">
           <li class="list-group-item active bg-success" aria-current="true">Delivary Brands</li>
           <?php 
-          getbrands();
+          getbrands_products();
           ?>
     
         </ul>
         <ul class="list-group">
           <li class="list-group-item active bg-success" aria-current="true">Categories</li>
           <?php 
-         getcategories();
+         getcategories_products();
           ?>
         </ul>
         </div>
