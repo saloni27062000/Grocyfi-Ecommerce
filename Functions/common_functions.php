@@ -29,7 +29,8 @@ function getproducts(){
                        <h5 class='card-title'>$product_title</h5>
                         <p class='card-text'>$product_description</p>
                         <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+                         <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+                         <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                          
                      </div>
                     </div>
@@ -70,7 +71,8 @@ function getproducts(){
                  <h5 class='card-title'>$product_title</h5>
                   <p class='card-text'>$product_description</p>
                   <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+                         <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+                         <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                    
                </div>
               </div>
@@ -151,7 +153,8 @@ while($row_data=mysqli_fetch_assoc($result_category)) {
                      <h5 class='card-title'>$product_title</h5>
                       <p class='card-text'>$product_description</p>
                       <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-                         <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+                         <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+                         <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                        
                    </div>
                   </div>
@@ -197,7 +200,8 @@ while($row_data=mysqli_fetch_assoc($result_category)) {
              <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
               <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-              <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+              <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                
            </div>
           </div>
@@ -269,7 +273,8 @@ function search_product(){
              <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
               <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-              <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+              <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                
            </div>
           </div>
@@ -313,7 +318,8 @@ function view_details(){
              <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
               <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
-               <a href='' class='btn btn-success'>Add to cart</a> <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
+               <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
                
            </div>
           </div>
@@ -343,4 +349,55 @@ function view_details(){
 }
 }
 }
+
+
+function getIPAddress(){
+
+  //whether ip is from share internet
+  if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  }
+  //whether ip is from the proxy
+  elseif(!empty($_SERVER['HTTP_X_FORWARDED'])){
+
+    $ip = $_SERVER['HTTP_X_FORWARDED'];
+
+  }
+    //whether ip is from the remote address
+  else{
+
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+    return $ip;
+}
+  // $ip=getIPAddress();
+  // echo'User Real IP Address' .$ip;
+
+
+  // add to cart function
+
+  function cart(){
+
+    if(isset($_GET['add_to_cart'])){
+
+    global $conn;
+    $get_ip_add = getIPAddress();  //the ip adress we got from getIPAddress function will be stored in $fet_ip_add variable
+    $get_product_id = $_GET['add_to_cart'];
+    $select_query = "SELECT * FROM `cart_details` WHERE product_id = $get_product_id AND ip_address = '$get_ip_add'";
+    $result_query = mysqli_query($conn,$select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows > 0){
+    echo "<script>alert('This item is already present inside cart.');</script>";  //if no data is present display no stock or else while() will be displayed
+    echo "<script>window.open('index.php','_self')</script>";
+  }else{
+
+    $insert_query = "INSERT INTO `cart_details` (product_id, ip_address, quantity) VALUES ($get_product_id, '$get_ip_add', 1)";
+    $result_query = mysqli_query($conn,$insert_query);
+    echo "<script>alert('Item is been inserted successfully!!');</script>";  //if no data is present display no stock or else while() will be displayed
+    echo "<script>window.open('index.php','_self')</script>";
+
+  }
+}
+  }
 ?>

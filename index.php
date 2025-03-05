@@ -35,14 +35,13 @@ include("main_slider.php");
             <div class="row ">
             <!-- fetching products on home page -->
             <?php
-           getproducts();
-           
-
-            ?>
-
-            <?php
+            getproducts();
             get_unique_categories();
-            get_unique_brands()
+            get_unique_brands();
+            cart() ;
+
+            // $ip=getIPAddress();
+            // echo'User Real IP Address' .$ip;
             ?>
                 
                 </div>
