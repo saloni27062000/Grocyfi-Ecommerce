@@ -319,7 +319,7 @@ function view_details(){
               <p class='card-text'>$product_description</p>
               <h5 class='card-text text-success'>Price : $product_price/-</h5><br>
               <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to cart</a> 
-               <span class='float-end'><a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View More</a></span>
+               <span class='float-end'><a href='index.php' class='btn btn-outline-success'>Go Home</a></span>
                
            </div>
           </div>
@@ -400,4 +400,54 @@ function getIPAddress(){
   }
 }
   }
+
+
+  //fun for displaying number of items in cart
+  function cart_item_number(){
+
+    if(isset($_GET['add_to_cart'])){
+
+    global $conn;
+    $get_ip_add = getIPAddress();  //the ip adress we got from getIPAddress function will be stored in $fet_ip_add variable
+    $select_query = "SELECT * FROM `cart_details` WHERE ip_address = '$get_ip_add'";
+    $result_query = mysqli_query($conn,$select_query);
+    $count_cart_items=mysqli_num_rows($result_query);
+      }
+    else{
+
+        global $conn;
+        $get_ip_add = getIPAddress();  //the ip adress we got from getIPAddress function will be stored in $fet_ip_add variable
+        $select_query = "SELECT * FROM `cart_details` WHERE ip_address = '$get_ip_add'";
+        $result_query = mysqli_query($conn,$select_query);
+        $count_cart_items=mysqli_num_rows($result_query);
+
+  }
+  echo $count_cart_items;
+}
+
+
+//total cart price ie subtotal price of all items in the cart
+
+function total_cart_price(){
+
+  global $conn;
+  $get_ip_add = getIPAddress();
+  $total_price = 0;
+  $select_query = "select * from `cart_details` where ip_address = '$get_ip_add'";
+  $result_query = mysqli_query($conn,$select_query);
+  while($row = mysqli_fetch_array($result_query)){
+
+    $product_id=$row["product_id"];
+    $select_products = "select * from `products` where product_id = '$product_id'";
+    $result_products = mysqli_query($conn,$select_products);
+    while($row_product_price = mysqli_fetch_array($result_products)){
+
+      $product_price=$row_product_price["product_price"];
+      $product_values = $row_product_price["product_price"];
+      $total_price +=$product_price;
+    }
+
+}
+echo $total_price;
+}
 ?>

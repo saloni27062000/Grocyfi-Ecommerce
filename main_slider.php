@@ -1,4 +1,5 @@
-<div id="carouselExampleCaptions" class="carousel slide" style="margin-top:95px">
+<div id="carouselExampleCaptions" class="carousel slide" >
+  <!-- style="margin-top:95px" -->
 <div class="carousel-indicators">
   <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
   <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
